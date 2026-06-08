@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+
+      - name: Run markdown-link-check
+        run: markdown-link-check README.md --config .markdown-link-check.json || true
+
+      - name: Run shellcheck
+        uses: koalaman/shellcheck-action@v1
+        with:
+          shellcheck_version: '0.9.0'
+
+      - name: Run bash -n syntax check
+        run: |
+          set -e
+          bash -n install.sh
+          for f in scripts/*.sh; do bash -n "$f"; done
+
+  validate:
+    runs-on: ubuntu-latest
+    needs: lint-and-checks
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run validate script
+        run: |
+          chmod +x scripts/validate.sh
+          ./scripts/validate.sh

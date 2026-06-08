@@ -1,204 +1,112 @@
-# 🍎 macOS Theme Suite for Linux
+# macOS Theme for Linux
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/vinceliuice/WhiteSur-gtk-theme/master/screenshots/screenshot-01.png" alt="macOS Theme for Linux Banner" width="800">
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Release](https://img.shields.io/github/v/release/MarbleCeo/macos-theme-for-linux?include_prereleases)](https://github.com/MarbleCeo/macos-theme-for-linux/releases)
+[![Platform: Linux](https://img.shields.io/badge/Platform-Linux-blue.svg)](https://www.linux.org/)
 
-<p align="center">
-  <b>Transform your Linux desktop into a complete macOS-like environment with enhanced features and polish!</b>
-</p>
+**Developed by [MarbleCeo](https://github.com/MarbleCeo)**
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#-customization">Customization</a> •
-  <a href="#%EF%B8%8F-themes">Themes</a> •
-  <a href="#-documentation">Documentation</a>
-</p>
+macOS Theme for Linux provides an automated installer for a complete macOS-inspired desktop experience on supported Linux systems. Created by MarbleCeo, this project installs the WhiteSur GTK theme, WhiteSur icon theme, Plank dock, wallpapers, and optional sound effects.
 
-## ✨ Features
+## What's Included
 
-Our enhanced macOS theme suite goes beyond the basics to provide a truly immersive macOS-like experience on Linux:
+- **WhiteSur GTK Theme** with 7 color accents (blue, purple, pink, red, orange, yellow, green)
+- **WhiteSur Icon Theme** for consistent visual identity
+- **macOS-Style Cursors** (Capitaine Cursors)
+- **Plank Dock** with professional macOS appearance
+- **Official macOS Wallpapers** (Sonoma light/dark)
+- **14+ macOS Sound Effects** with automatic configuration
+- **Multi-DE Support:** GNOME, XFCE, Cinnamon, MATE, KDE/Plasma
 
-- 🎨 **Complete WhiteSur GTK Theme** (Light/Dark modes with accent colors)
-- 🖌️ **WhiteSur Icon Theme** with macOS-style application icons
-- 🚀 **Advanced Plank Dock** with realistic macOS animations and behavior
-- 🔍 **Spotlight-inspired Application Launcher**
-- 🎵 **Authentic macOS Sound Effects** (startup, alerts, UI interactions)
-- 🖥️ **Dynamic Wallpaper** that changes based on time of day (like in macOS)
-- 🔤 **SF Pro Font Integration** for authentic Apple typography
-- 🧰 **Finder-like File Manager Customizations**
-- ⚡ **Window Management Gestures** for trackpad users
-- 🔄 **Auto-update mechanism** to keep your theme current
 
-## 🚀 Installation
-
-### One-Command Installation
-
-```bash
-git clone https://github.com/marbleceo/macos-theme-for-linux.git && cd macos-theme-for-linux && sudo ./install.sh
-```
-
-### Interactive Installation (Recommended)
-
-For more control over what gets installed:
+## Installation
 
 ```bash
 git clone https://github.com/marbleceo/macos-theme-for-linux.git
 cd macos-theme-for-linux
-sudo ./install.sh --interactive
+sudo ./install.sh
 ```
 
-### Options
+## Installer options
 
-| Option | Description |
-|--------|-------------|
-| `--interactive` | Interactive installation with customization options |
-| `--minimal` | Install only essential components (theme and icons) |
-| `--complete` | Install all components including sounds and fonts |
-| `--dark` | Set dark mode as default |
-| `--accent=COLOR` | Set accent color (blue, purple, pink, red, orange, yellow, green) |
+- `--interactive`: run the installer in interactive mode
+- `--minimal`: install themes, icons, dock and wallpapers only
+- `--complete`: install all components, including sound effects
+- `--dark`: set dark mode as default
+- `--accent=<color>`: choose accent color (blue, purple, pink, red, orange, yellow, green)
+- `--no-wallpapers`: skip wallpaper download
+- `--no-sounds`: skip sound effect installation
+- `--no-dock`: skip Plank dock configuration
+- `--help`: display available options
 
-## 🎛️ Customization
+## Usage examples
 
-### Theme Switcher
-
-Switch between light and dark mode with our included theme switcher:
+Install the complete desktop theme package with dark mode and purple accent:
 
 ```bash
-./scripts/theme_switcher.sh --dark   # Switch to dark mode
-./scripts/theme_switcher.sh --light  # Switch to light mode
+sudo ./install.sh --complete --dark --accent=purple
 ```
 
-### Dynamic Wallpaper
-
-Enable the dynamic wallpaper feature that changes throughout the day:
+Install only the visual theme components without sounds:
 
 ```bash
-./scripts/enable_dynamic_wallpaper.sh
+sudo ./install.sh --minimal
 ```
 
-### Sound Effects
+## Included Helper Scripts
 
-Enable or disable macOS sound effects:
+- `./scripts/pre-install-check.sh` - Validates system requirements
+- `./scripts/theme_switcher.sh --light|--dark [--accent=<color>]` - Switch themes
+- `./scripts/dock_configurator.sh <user-home> <light|dark>` - Reconfigure dock
+- `./scripts/sound_effects.sh install|enable|disable` - Manage sounds
+- `./uninstall.sh [--force] [--preserve]` - Complete uninstallation
 
-```bash
-./scripts/sound_effects.sh --enable
-./scripts/sound_effects.sh --disable
-```
+## Documentation
 
-## 🖌️ Themes
-
-Choose from multiple theme variants:
-
-- **WhiteSur Light** - Classic light appearance
-- **WhiteSur Dark** - Sleek dark appearance
-- **WhiteSur Accent Colors** - Customize with various accent colors:
-  - Blue (Default)
-  - Purple
-  - Pink
-  - Red
-  - Orange
-  - Yellow
-  - Green
-
-## 📚 Documentation
-
-Comprehensive documentation is available in the `docs` directory:
-
-- [Installation Guide](docs/installation.md)
+- [Installation](docs/installation.md)
+- [Customization](docs/customization.md)
 - [Troubleshooting](docs/troubleshooting.md)
-- [Customization Options](docs/customization.md)
-- [Desktop Environment Compatibility](docs/compatibility.md)
-- [Theme Development](docs/development.md)
+- [Compatibility](docs/compatibility.md)
 
-## 🖥️ Compatibility
+## Compatibility
 
-This theme suite has been thoroughly tested on:
+- Supported package managers: `apt`, `dnf`, `pacman`, `zypper`
+- Supported desktop environments: GNOME, XFCE, Cinnamon, MATE, KDE/Plasma (partial)
 
-| Distribution | Desktop Environments | Status |
-|--------------|----------------------|--------|
-| Ubuntu 20.04+ | GNOME, XFCE, Unity, Budgie | ✅ Full Support |
-| Linux Mint | Cinnamon, MATE, XFCE | ✅ Full Support |
-| Debian 11+ | GNOME, XFCE, Cinnamon | ✅ Full Support |
-| Fedora | GNOME, XFCE, Cinnamon | ✅ Full Support |
-| Manjaro | XFCE, KDE, GNOME | ✅ Full Support |
-| Pop!_OS | GNOME, COSMIC | ✅ Full Support |
-| Kali Linux | XFCE, GNOME | ✅ Full Support |
-| elementary OS | Pantheon | ⚠️ Partial Support |
-| Arch Linux | Most DEs | ✅ Full Support |
-| openSUSE | KDE, GNOME, XFCE | ✅ Full Support |
+> KDE/Plasma support is partial and may require manual configuration.
 
-## 🛠️ Components
+## About
 
-Our theme suite installs the following components:
+This project was developed by **MarbleCeo** to provide the Linux community with an easy-to-use automated installer for achieving a polished macOS-style desktop. Every script, configuration, and feature in this repository was designed and implemented by MarbleCeo.
 
-1. **Core Theme Components**
-   - WhiteSur GTK2/3/4 Theme
-   - WhiteSur Icon Theme
-   - Plank Dock with macOS theme
-   - SF Pro Font (optional)
+## Support the Project
 
-2. **Enhanced Experience**
-   - macOS-style cursors
-   - macOS sound effects
-   - Dynamic wallpapers
-   - Spotlight-like application launcher
+This is currently **FREE and open-source** on GitHub! 
 
-3. **Configuration Tools**
-   - Theme switcher (Light/Dark)
-   - Accent color selector
-   - Settings backup/restore utility
-   - Auto-update script
+If you find value in this project, you can support its development:
+- ⭐ Star this repository
+- 🐛 Report issues and suggest features
+- 🤝 Contribute code or documentation
+- 💰 Optional: Premium version coming soon with advanced features
 
-## 📸 Screenshots
+## Premium Features (Coming Soon)
 
-<p align="center">
-  <img src="assets/screenshots/desktop.png" width="48%" alt="Desktop Screenshot">
-  <img src="assets/screenshots/applications.png" width="48%" alt="Applications Screenshot">
-</p>
+- All 7 color accents
+- Automatic updates
+- Advanced configuration options
+- Priority support
+- License for personal use
 
-<p align="center">
-  <img src="assets/screenshots/dark-mode.png" width="48%" alt="Dark Mode Screenshot">
-  <img src="assets/screenshots/settings.png" width="48%" alt="Settings Screenshot">
-</p>
+**Roadmap:** v1.1.0 will include GitHub Actions CI/CD, GUI installer, and i18n support.
 
-## 🔄 Updates
 
-The theme is actively maintained. To update to the latest version:
+## Credits
 
-```bash
-cd macos-theme-for-linux
-git pull
-sudo ./install.sh --update
-```
+- **WhiteSur GTK Theme** by [vinceliuice](https://github.com/vinceliuice/WhiteSur-gtk-theme)
+- **macOS Wallpapers** from [512pixels.net](https://512pixels.net/)
+- **macOS Sounds** from [petrstepanov/macos-sounds](https://github.com/petrstepanov/macos-sounds)
+- **Plank Dock** for the macOS-style dock implementation
 
-## 🤝 Contributing
+## License
 
-Contributions are welcome! Please feel free to submit pull requests or open issues.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👏 Credits
-
-- [WhiteSur GTK Theme](https://github.com/vinceliuice/WhiteSur-gtk-theme) by vinceliuice
-- [WhiteSur Icon Theme](https://github.com/vinceliuice/WhiteSur-icon-theme) by vinceliuice
-- Additional components and enhancements by the macOS Theme for Linux team
-
----
-
-<p align="center">
-  Made with ❤️ for the Linux community
-</p>
-
-<p align="center">
-  <b>Tags:</b> #Linux #macOS #theme #WhiteSur #GTK #Plank #dock #customization #ricing #ubuntu #debian #kali #fedora #mint #manjaro
-</p>
+Released under the MIT License. See [LICENSE](LICENSE).

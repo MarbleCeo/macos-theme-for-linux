@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 # theme_switcher.sh - Allows switching between light and dark themes
 
 # ANSI color codes
@@ -142,34 +144,36 @@ update_plank_theme() {
     
     # Determine theme colors based on mode
     if [ "$theme_mode" = "dark" ]; then
-        FILL_COLOR="50;;50;;50"
-        STROKE_COLOR="30;;30;;30"
+        FILL_COLOR="30;;30;;30"
+        STROKE_COLOR="20;;20;;20"
+        OUTER_STROKE="15;;15;;15;;255"
     else
-        FILL_COLOR="240;;240;;240"
-        STROKE_COLOR="220;;220;;220"
+        FILL_COLOR="245;;245;;245"
+        STROKE_COLOR="225;;225;;225"
+        OUTER_STROKE="180;;180;;180;;200"
     fi
     
     # Create a macOS-like theme for Plank
     cat > "$PLANK_THEME_DIR/dock.theme" << END
 [PlankTheme]
-TopRoundness=4
+TopRoundness=8
 BottomRoundness=0
 LineWidth=1
-OuterStrokeColor=22;;22;;22;;255
-FillStartColor=${FILL_COLOR};;220
-FillEndColor=${FILL_COLOR};;220
-InnerStrokeColor=${STROKE_COLOR};;220
+OuterStrokeColor=${OUTER_STROKE}
+FillStartColor=${FILL_COLOR};;240
+FillEndColor=${FILL_COLOR};;240
+InnerStrokeColor=${STROKE_COLOR};;200
 
 [PlankDockTheme]
-HorizPadding=4
-TopPadding=2
-BottomPadding=2
-ItemPadding=3
-IndicatorSize=5
-IconShadowSize=1
-UrgentBounceHeight=1.6666666666666667
-LaunchBounceHeight=0.625
-FadeOpacity=1
+HorizPadding=8
+TopPadding=4
+BottomPadding=6
+ItemPadding=6
+IndicatorSize=6
+IconShadowSize=2
+UrgentBounceHeight=1.8
+LaunchBounceHeight=0.7
+FadeOpacity=0.95
 ClickTime=300
 UrgentBounceTime=600
 LaunchBounceTime=600
@@ -177,7 +181,7 @@ ActiveTime=300
 SlideTime=300
 FadeTime=250
 HideTime=250
-GlowSize=30
+GlowSize=35
 GlowTime=10000
 GlowPulseTime=2000
 UrgentHueShift=150
@@ -267,46 +271,42 @@ main() {
         USER_HOME=$HOME
     fi
     
-    # Load desktop environment from config file if possible
-    CONFIG_FILE="$USER_HOME/.config/macos-theme-config.conf"
+CONFIG_FILE="$USER_HOME/.config/macos-theme-config.conf"
+    local config_theme_mode=""
+    local config_accent_color=""
+
     if [ -f "$CONFIG_FILE" ]; then
         source "$CONFIG_FILE"
-        DESKTOP_ENV_CONFIG="$DESKTOP_ENV"
+        config_theme_mode="${THEME_MODE:-}"
+        config_accent_color="${ACCENT_COLOR:-}"
     fi
-    
-    # Detect desktop environment if not found in config
-    if [ -z "$DESKTOP_ENV_CONFIG" ]; then
-        if [ -n "$XDG_CURRENT_DESKTOP" ]; then
-            DESKTOP_ENV="$XDG_CURRENT_DESKTOP"
-        elif [ -n "$XDG_SESSION_DESKTOP" ]; then
-            DESKTOP_ENV="$XDG_SESSION_DESKTOP"
-        elif [ -n "$DESKTOP_SESSION" ]; then
-            DESKTOP_ENV="$DESKTOP_SESSION"
-        else
-            # Try to detect based on running processes
-            if pgrep -x "gnome-shell" > /dev/null; then
-                DESKTOP_ENV="GNOME"
-            elif pgrep -x "plasmashell" > /dev/null; then
-                DESKTOP_ENV="KDE"
-            elif pgrep -x "xfce4-session" > /dev/null; then
-                DESKTOP_ENV="XFCE"
-            elif pgrep -x "cinnamon" > /dev/null; then
-                DESKTOP_ENV="Cinnamon"
-            elif pgrep -x "mate-session" > /dev/null; then
-                DESKTOP_ENV="MATE"
-            else
-                DESKTOP_ENV="Unknown"
-            fi
-        fi
+
+    if [ -z "$THEME_MODE" ]; then
+        THEME_MODE="$config_theme_mode"
+    fi
+    if [ -z "$ACCENT_COLOR" ]; then
+        ACCENT_COLOR="$config_accent_color"
+    fi
+
+    if [ -n "$XDG_CURRENT_DESKTOP" ]; then
+        DESKTOP_ENV="$XDG_CURRENT_DESKTOP"
+    elif [ -n "$XDG_SESSION_DESKTOP" ]; then
+        DESKTOP_ENV="$XDG_SESSION_DESKTOP"
+    elif [ -n "$DESKTOP_SESSION" ]; then
+        DESKTOP_ENV="$DESKTOP_SESSION"
     else
-        DESKTOP_ENV="$DESKTOP_ENV_CONFIG"
-    fi
-    
-    # Get accent color from config if not provided and config exists
-    if [ -z "$ACCENT_COLOR" ] && [ -f "$CONFIG_FILE" ]; then
-        ACCENT_COLOR_CONFIG="$ACCENT_COLOR"
-        if [ -n "$ACCENT_COLOR_CONFIG" ]; then
-            ACCENT_COLOR="$ACCENT_COLOR_CONFIG"
+        if pgrep -x "gnome-shell" > /dev/null; then
+            DESKTOP_ENV="GNOME"
+        elif pgrep -x "plasmashell" > /dev/null; then
+            DESKTOP_ENV="KDE"
+        elif pgrep -x "xfce4-session" > /dev/null; then
+            DESKTOP_ENV="XFCE"
+        elif pgrep -x "cinnamon" > /dev/null; then
+            DESKTOP_ENV="Cinnamon"
+        elif pgrep -x "mate-session" > /dev/null; then
+            DESKTOP_ENV="MATE"
+        else
+            DESKTOP_ENV="Unknown"
         fi
     fi
     
