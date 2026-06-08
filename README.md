@@ -79,6 +79,24 @@ sudo ./install.sh --minimal
 
 This project was developed by **MarbleCeo** to provide the Linux community with an easy-to-use automated installer for achieving a polished macOS-style desktop. Every script, configuration, and feature in this repository was designed and implemented by MarbleCeo.
 
+## Attribution
+
+This project is based on the following open-source projects and components:
+
+- **WhiteSur GTK Theme** - Created by [vinceliuice](https://github.com/vinceliuice)
+  - Repository: [WhiteSur-gtk-theme](https://github.com/vinceliuice/WhiteSur-gtk-theme)
+  - License: GPL-3.0
+  
+- **WhiteSur Icon Theme** - Created by [vinceliuice](https://github.com/vinceliuice)
+  - Part of the WhiteSur project
+  - License: GPL-3.0
+
+- **Capitaine Cursors** - Cursor theme used
+  
+- **Plank Dock** - The dock application
+
+This project wraps and automates these components for a seamless all-in-one installation experience on Linux.
+
 ## Support the Project
 
 This is currently **FREE and open-source** on GitHub! 
